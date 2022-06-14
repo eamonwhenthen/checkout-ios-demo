@@ -8,8 +8,11 @@ import PassKit
 
 class ViewController: UIViewController {
     
-     var paymentStatus = PKPaymentAuthorizationStatus.failure
+    var paymentStatus = PKPaymentAuthorizationStatus.failure
     var paymentSummaryItems = [PKPaymentSummaryItem]()
+    var flowId = "a1575a24-85ec-44f6-a82b-2105cec23e7a"
+    
+    var paymentToken = "a1575a24-85ec"
 
     
     static let supportedNetworks: [PKPaymentNetwork] = [
@@ -76,6 +79,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         shoePickerView.delegate = self
         shoePickerView.dataSource = self
+            
+//        let paytoken = readLocalFile(forName: "ApplePayToken");
+//        do {
+//            let jsonData = try JSONEncoder().encode(paytoken)
+//            self.paymentToken = String(data: jsonData, encoding: .utf8)!
+//            print(self.paymentToken )
+//        } catch { print(error) }
+        
     }
     
 }
@@ -90,7 +101,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
         
         // Perform basic validation on the provided contact information.
         var errors = [Error]()
-        var status = PKPaymentAuthorizationStatus.success
+        //var status = PKPaymentAuthorizationStatus.success
 //        if payment.shippingContact?.postalAddress?.isoCountryCode != "US" {
 //            let pickupError = PKPaymentRequest.paymentShippingAddressUnserviceableError(withLocalizedDescription: "Sample App only available in the United States")
 //
@@ -104,11 +115,50 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
 //            // Once processed, return an appropriate status in the completion handler (success, failure, and so on).
 //        }
         
-        dump(payment.token)
-        self.paymentStatus = status
-        completion(PKPaymentAuthorizationResult(status: status, errors: errors))
+        dump(payment.token.paymentData.base64EncodedString())
+        
+        self.paymentStatus = authorizePayment(token: payment.token)
+        completion(PKPaymentAuthorizationResult(status: self.paymentStatus, errors: errors))
     }
     
+    func authorizePayment(token: PKPaymentToken) -> PKPaymentAuthorizationStatus {
+        
+        let authorizeInput = AuthorisedPaymentInput(
+            orderId: "xxxxx-orderId",
+            flowId: self.flowId,
+            currencyCode: "USD",
+            amount: "13900",
+            paymentMethod: PaymentMethodDtoInput(
+                type: "APPLE_PAY",
+                walletToken: token.paymentData.base64EncodedString())
+            )
+        
+        Request.shared.apollo.perform(mutation: AuthorizePaymentMutation(authorisePayment: authorizeInput)) { result in
+          //TODO: map to PKPaymentAuthorizationStatus
+          switch result {
+          case .success(let graphQLResult):
+            print("Success! Result: \(graphQLResult)")
+          case .failure(let error):
+            print("Failure! Error: \(error)")
+          }
+        }
+        
+        return PKPaymentAuthorizationStatus.failure
+    }
+    
+    private func readLocalFile(forName name: String) -> Data? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
     
     
     // MARK: - Pickerview update

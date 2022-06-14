@@ -3,10 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		064F9B772858E77200BB5B84 /* AuthorizePayment.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 064F9B762858E3D000BB5B84 /* AuthorizePayment.graphql */; };
+		064F9B792858E7AF00BB5B84 /* schema.json in Sources */ = {isa = PBXBuildFile; fileRef = 064F9B782858E7AF00BB5B84 /* schema.json */; };
+		064F9B7D28590AB400BB5B84 /* ApplePayToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 064F9B7C28590AB400BB5B84 /* ApplePayToken.json */; };
+		06B5973E28576BC4000AD460 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 06B5973D28576BC4000AD460 /* Apollo */; };
+		06B5974028576BC4000AD460 /* ApolloUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 06B5973F28576BC4000AD460 /* ApolloUtils */; };
+		06B5974228576BC4000AD460 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 06B5974128576BC4000AD460 /* ApolloWebSocket */; };
+		06B59746285889DF000AD460 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 06B59745285889DF000AD460 /* Apollo */; };
+		06B59748285889DF000AD460 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 06B59747285889DF000AD460 /* ApolloWebSocket */; };
+		06B5974B28588E05000AD460 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B5974A28588E05000AD460 /* Request.swift */; };
+		06B5974E2858B4D8000AD460 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B5974C2858B4D7000AD460 /* API.swift */; };
+		06B5974F2858B4E2000AD460 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B5974D2858B4D8000AD460 /* Request.swift */; };
 		BF57354B21D6D05C00D083AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF57354A21D6D05C00D083AE /* AppDelegate.swift */; };
 		BF57354D21D6D05C00D083AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF57354C21D6D05C00D083AE /* ViewController.swift */; };
 		BF57355021D6D05C00D083AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF57354E21D6D05C00D083AE /* Main.storyboard */; };
@@ -15,7 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		064F9B762858E3D000BB5B84 /* AuthorizePayment.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AuthorizePayment.graphql; sourceTree = "<group>"; };
+		064F9B782858E7AF00BB5B84 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		064F9B7C28590AB400BB5B84 /* ApplePayToken.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApplePayToken.json; sourceTree = "<group>"; };
 		06B5973B28538313000AD460 /* WhenThen ApplePay Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WhenThen ApplePay Demo.entitlements"; sourceTree = "<group>"; };
+		06B5974A28588E05000AD460 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		06B5974C2858B4D7000AD460 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		06B5974D2858B4D8000AD460 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		BF57354721D6D05C00D083AE /* WhenThen ApplePay Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WhenThen ApplePay Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF57354A21D6D05C00D083AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF57354C21D6D05C00D083AE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +47,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B5973E28576BC4000AD460 /* Apollo in Frameworks */,
+				06B59746285889DF000AD460 /* Apollo in Frameworks */,
+				06B59748285889DF000AD460 /* ApolloWebSocket in Frameworks */,
+				06B5974228576BC4000AD460 /* ApolloWebSocket in Frameworks */,
+				06B5974028576BC4000AD460 /* ApolloUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +78,18 @@
 			isa = PBXGroup;
 			children = (
 				06B5973B28538313000AD460 /* WhenThen ApplePay Demo.entitlements */,
+				06B5974D2858B4D8000AD460 /* Request.swift */,
+				06B5974C2858B4D7000AD460 /* API.swift */,
 				BF57354A21D6D05C00D083AE /* AppDelegate.swift */,
+				064F9B762858E3D000BB5B84 /* AuthorizePayment.graphql */,
 				BF57354C21D6D05C00D083AE /* ViewController.swift */,
 				BF57354E21D6D05C00D083AE /* Main.storyboard */,
+				064F9B782858E7AF00BB5B84 /* schema.json */,
 				BF57355121D6D05D00D083AE /* Assets.xcassets */,
 				BF57355321D6D05D00D083AE /* LaunchScreen.storyboard */,
 				BF57355621D6D05D00D083AE /* Info.plist */,
+				06B5974A28588E05000AD460 /* Request.swift */,
+				064F9B7C28590AB400BB5B84 /* ApplePayToken.json */,
 			);
 			path = "WhenThen ApplePay Demo";
 			sourceTree = "<group>";
@@ -73,6 +101,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF57355921D6D05D00D083AE /* Build configuration list for PBXNativeTarget "WhenThen ApplePay Demo" */;
 			buildPhases = (
+				06B5974928588ADE000AD460 /* Apollo Graphql */,
 				BF57354321D6D05C00D083AE /* Sources */,
 				BF57354421D6D05C00D083AE /* Frameworks */,
 				BF57354521D6D05C00D083AE /* Resources */,
@@ -82,6 +111,13 @@
 			dependencies = (
 			);
 			name = "WhenThen ApplePay Demo";
+			packageProductDependencies = (
+				06B5973D28576BC4000AD460 /* Apollo */,
+				06B5973F28576BC4000AD460 /* ApolloUtils */,
+				06B5974128576BC4000AD460 /* ApolloWebSocket */,
+				06B59745285889DF000AD460 /* Apollo */,
+				06B59747285889DF000AD460 /* ApolloWebSocket */,
+			);
 			productName = "WhenThen ApplePay Demo";
 			productReference = BF57354721D6D05C00D083AE /* WhenThen ApplePay Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +146,10 @@
 				Base,
 			);
 			mainGroup = BF57353E21D6D05C00D083AE;
+			packageReferences = (
+				06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				06B59744285889DF000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = BF57354821D6D05C00D083AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,16 +167,43 @@
 				BF57355521D6D05D00D083AE /* LaunchScreen.storyboard in Resources */,
 				BF57355221D6D05D00D083AE /* Assets.xcassets in Resources */,
 				BF57355021D6D05C00D083AE /* Main.storyboard in Resources */,
+				064F9B7D28590AB400BB5B84 /* ApplePayToken.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06B5974928588ADE000AD460 /* Apollo Graphql */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Apollo Graphql";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\n# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF57354321D6D05C00D083AE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064F9B792858E7AF00BB5B84 /* schema.json in Sources */,
+				064F9B772858E77200BB5B84 /* AuthorizePayment.graphql in Sources */,
+				06B5974E2858B4D8000AD460 /* API.swift in Sources */,
+				06B5974B28588E05000AD460 /* Request.swift in Sources */,
+				06B5974F2858B4E2000AD460 /* Request.swift in Sources */,
 				BF57354D21D6D05C00D083AE /* ViewController.swift in Sources */,
 				BF57354B21D6D05C00D083AE /* AppDelegate.swift in Sources */,
 			);
@@ -340,6 +407,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
+		06B59744285889DF000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		06B5973D28576BC4000AD460 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		06B5973F28576BC4000AD460 /* ApolloUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloUtils;
+		};
+		06B5974128576BC4000AD460 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+		06B59745285889DF000AD460 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		06B59747285889DF000AD460 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06B5973C28576BC4000AD460 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF57353F21D6D05C00D083AE /* Project object */;
 }
