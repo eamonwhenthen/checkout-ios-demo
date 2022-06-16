@@ -10,8 +10,6 @@ class ViewController: UIViewController {
     
     var paymentSummaryItems = [PKPaymentSummaryItem]()
     let flowId = "65d1673f-7003-4242-a009-bf6a0031bd3a"
-    let apiKey = "sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U"
-    let apiEndpoint = "https://api.dev.whenthen.co/api/graphql"
 
     static let supportedNetworks: [PKPaymentNetwork] = [
         .amex,
