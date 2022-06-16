@@ -8,10 +8,11 @@ import PassKit
 
 class ViewController: UIViewController {
     
-    var paymentStatus = PKPaymentAuthorizationStatus.failure
     var paymentSummaryItems = [PKPaymentSummaryItem]()
-    var flowId = "65d1673f-7003-4242-a009-bf6a0031bd3a"
-    
+    let flowId = "65d1673f-7003-4242-a009-bf6a0031bd3a"
+    let apiKey = "sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U"
+    let apiEndpoint = "https://api.dev.whenthen.co/api/graphql"
+
     static let supportedNetworks: [PKPaymentNetwork] = [
         .amex,
         .discover,
@@ -76,16 +77,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         shoePickerView.delegate = self
         shoePickerView.dataSource = self
-            
-//        let paytoken = readLocalFile(forName: "ApplePayToken");
-//        do {
-//            let jsonData = try JSONEncoder().encode(paytoken)
-//            self.paymentToken = String(data: jsonData, encoding: .utf8)!
-//            print(self.paymentToken )
-//        } catch { print(error) }
-        
-       
-        
     }
     
 }
@@ -93,86 +84,52 @@ class ViewController: UIViewController {
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymentAuthorizationViewControllerDelegate  {
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        controller.dismiss(animated: true, completion: nil)
+        //controller.dismiss(animated: true, completion: nil)
     }
-    
+        
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         
         // Perform basic validation on the provided contact information.
-        var errors = [Error]()
-        //var status = PKPaymentAuthorizationStatus.success
-//        if payment.shippingContact?.postalAddress?.isoCountryCode != "US" {
-//            let pickupError = PKPaymentRequest.paymentShippingAddressUnserviceableError(withLocalizedDescription: "Sample App only available in the United States")
-//
-//            errors.append(pickupError)
-//            status = .failure
-//        } else {
-//
-//            NSLog("Payment Token")
-//            dump(payment.token)
-//            // Send the payment token to your server or payment provider to process here.
-//            // Once processed, return an appropriate status in the completion handler (success, failure, and so on).
-//        }
+        let errors = [Error]()
         
-        //dump(payment.token.paymentData.base64EncodedString())
-        let token = readLocalFile(forName: "ApplePayToken")!;
+        var token = fromBase64(word: payment.token.paymentData.base64EncodedString())
+        token = "{ \"paymentData\": \(token) }"
         
-        let paymentStaus = authorizePayment(token: token)
-        completion(PKPaymentAuthorizationResult(status: paymentStaus, errors: errors))
-    }
-    
-    func authorizePayment(token: String)  -> PKPaymentAuthorizationStatus {
-    
-        var status = PKPaymentAuthorizationStatus.failure
+        //let token = readLocalFile(forName: "ApplePayToken")!; //use local token
+        
+        //build the graphql request with token
         let authorizeInput = AuthorisedPaymentInput(
-//                        orderId: "xxxxx-orderId",
+                        orderId: "xxxxx-orderId",
                         flowId: self.flowId,
-//                        currencyCode: "USD",
-//                        amount: "13900",
                         paymentMethod: PaymentMethodDtoInput(
                             type: "APPLE_PAY",
                             walletToken: token)
                         )
-                    
-      Request.shared.apollo.perform(mutation: AuthorizePaymentMutation(
-              authorisePayment: authorizeInput)) { result in
+        
+        Request.shared.apollo.perform(
+              mutation: AuthorizePaymentMutation( authorisePayment: authorizeInput)){ result in
               switch result {
                  case .success(let graphQLResult):
-                  print("Request successful")
-                
                         if let paymentResult = graphQLResult.data?.authorizePayment {
-                            if [.succeeded, .declined].contains(paymentResult.status) {
-                                status = .success
+                            if [.succeeded, .authorised].contains(paymentResult.status) {
+                                completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
                             }
                             print(paymentResult)
                         }
                         
-                        if graphQLResult.errors != nil {
-                          //Do something
-                            print(graphQLResult.errors)
+                        if graphQLResult.errors != nil { //reflect api errors
+                            print(graphQLResult.errors as Any)
+                            completion(PKPaymentAuthorizationResult(status: .failure, errors: errors))
                         }
-                case .failure(let error):
-                        print("Request failed! Error: \(error)")
+                  break
+                case .failure(let error): //reflect network errors
+                   print("Request failed! Error: \(error)")
+                   completion(PKPaymentAuthorizationResult(status: .failure, errors: errors))
+                  break
                 }
             }
-    
-       return status
     }
-    
-    private func readLocalFile(forName name: String) -> String? {
-        do {
-            if let bundlePath = Bundle.main.path(forResource: name,
-                                                 ofType: "json"),
-                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                return String(data: jsonData, encoding: .utf8)!
-            }
-        } catch {
-            print(error)
-        }
-        
-        return nil
-    }
-    
+
     
     // MARK: - Pickerview update
     
@@ -192,4 +149,25 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
         let priceString = String(format: "%.02f", shoeData[row].price)
         priceLabel.text = "Price = $\(priceString)"
     }
+    
+    // MARK: - Helper functions
+    //for testing hardcoded token
+    private func readLocalFile(forName name: String) -> String? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return String(data: jsonData, encoding: .utf8)!
+            }
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
+    func fromBase64(word: String ) -> String {
+        let base64Decode = Data(base64Encoded: word)!
+        return String(data: base64Decode, encoding: .utf8)!
+    }
+    
 }

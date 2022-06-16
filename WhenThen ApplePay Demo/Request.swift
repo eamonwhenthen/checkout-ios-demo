@@ -11,7 +11,11 @@ import Apollo
 import UIKit
 
 class Request {
-  static let shared = Request()
+    
+    static let shared = Request()
+
+    private let apiKey = "sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U"
+    private let apiEndpoint = "https://api.dev.whenthen.co/api/graphql"
 
     private(set) lazy var apollo: ApolloClient = {
         
@@ -20,7 +24,7 @@ class Request {
         let idempotencyKey = UUID().uuidString
 
         let authPayloads = [
-            "Authorization": "Bearer sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U",
+            "Authorization": "Bearer \(self.apiKey)",
             "X-Idempotency-Key": idempotencyKey
         ]
         
@@ -31,7 +35,7 @@ class Request {
         
         let provider = NetworkInterceptorProvider(client:client, store: store)
                 
-        let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider as InterceptorProvider, endpointURL: URL(string: "https://api.dev.whenthen.co/api/graphql")!)
+        let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider as InterceptorProvider, endpointURL: URL(string: self.apiEndpoint)!)
         
         return ApolloClient(networkTransport: requestChainTransport, store: store)
     }()
@@ -53,9 +57,6 @@ class Request {
             request: HTTPRequest<Operation>,
             response: HTTPResponse<Operation>?,
             completion: @escaping (Swift.Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-//            request.addHeader(name: "Authorization", value: "Bearer sk_test_8LHMvPbOEAeXg8QCBVN02mS0t7w9dfIb")
-            print("request :\(request)")
-            print("response :\(String(describing: response))")
             
             chain.proceedAsync(request: request,
                                response: response,
