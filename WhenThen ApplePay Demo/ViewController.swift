@@ -10,10 +10,7 @@ class ViewController: UIViewController {
     
     var paymentStatus = PKPaymentAuthorizationStatus.failure
     var paymentSummaryItems = [PKPaymentSummaryItem]()
-    var flowId = "a1575a24-85ec-44f6-a82b-2105cec23e7a"
-    
-    var paymentToken = "a1575a24-85ec"
-
+    var flowId = "65d1673f-7003-4242-a009-bf6a0031bd3a"
     
     static let supportedNetworks: [PKPaymentNetwork] = [
         .amex,
@@ -87,6 +84,8 @@ class ViewController: UIViewController {
 //            print(self.paymentToken )
 //        } catch { print(error) }
         
+       
+        
     }
     
 }
@@ -115,43 +114,57 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
 //            // Once processed, return an appropriate status in the completion handler (success, failure, and so on).
 //        }
         
-        dump(payment.token.paymentData.base64EncodedString())
+        //dump(payment.token.paymentData.base64EncodedString())
+        let token = readLocalFile(forName: "ApplePayToken")!;
         
-        self.paymentStatus = authorizePayment(token: payment.token)
-        completion(PKPaymentAuthorizationResult(status: self.paymentStatus, errors: errors))
+        let paymentStaus = authorizePayment(token: token)
+        completion(PKPaymentAuthorizationResult(status: paymentStaus, errors: errors))
     }
     
-    func authorizePayment(token: PKPaymentToken) -> PKPaymentAuthorizationStatus {
-        
+    func authorizePayment(token: String)  -> PKPaymentAuthorizationStatus {
+    
+        var status = PKPaymentAuthorizationStatus.failure
         let authorizeInput = AuthorisedPaymentInput(
-            orderId: "xxxxx-orderId",
-            flowId: self.flowId,
-            currencyCode: "USD",
-            amount: "13900",
-            paymentMethod: PaymentMethodDtoInput(
-                type: "APPLE_PAY",
-                walletToken: token.paymentData.base64EncodedString())
-            )
-        
-        Request.shared.apollo.perform(mutation: AuthorizePaymentMutation(authorisePayment: authorizeInput)) { result in
-          //TODO: map to PKPaymentAuthorizationStatus
-          switch result {
-          case .success(let graphQLResult):
-            print("Success! Result: \(graphQLResult)")
-          case .failure(let error):
-            print("Failure! Error: \(error)")
-          }
-        }
-        
-        return PKPaymentAuthorizationStatus.failure
+//                        orderId: "xxxxx-orderId",
+                        flowId: self.flowId,
+//                        currencyCode: "USD",
+//                        amount: "13900",
+                        paymentMethod: PaymentMethodDtoInput(
+                            type: "APPLE_PAY",
+                            walletToken: token)
+                        )
+                    
+      Request.shared.apollo.perform(mutation: AuthorizePaymentMutation(
+              authorisePayment: authorizeInput)) { result in
+              switch result {
+                 case .success(let graphQLResult):
+                  print("Request successful")
+                
+                        if let paymentResult = graphQLResult.data?.authorizePayment {
+                            if [.succeeded, .declined].contains(paymentResult.status) {
+                                status = .success
+                            }
+                            print(paymentResult)
+                        }
+                        
+                        if graphQLResult.errors != nil {
+                          //Do something
+                            print(graphQLResult.errors)
+                        }
+                case .failure(let error):
+                        print("Request failed! Error: \(error)")
+                }
+            }
+    
+       return status
     }
     
-    private func readLocalFile(forName name: String) -> Data? {
+    private func readLocalFile(forName name: String) -> String? {
         do {
             if let bundlePath = Bundle.main.path(forResource: name,
                                                  ofType: "json"),
                 let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                return jsonData
+                return String(data: jsonData, encoding: .utf8)!
             }
         } catch {
             print(error)

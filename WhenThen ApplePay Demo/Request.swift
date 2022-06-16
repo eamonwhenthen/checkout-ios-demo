@@ -20,7 +20,7 @@ class Request {
         let idempotencyKey = UUID().uuidString
 
         let authPayloads = [
-            "Authorization": "Bearer ct_test_vAGhlK2K7VVr0BHF",
+            "Authorization": "Bearer sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U",
             "X-Idempotency-Key": idempotencyKey
         ]
         
