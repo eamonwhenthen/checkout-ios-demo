@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B500DBA6-506A-436F-873B-C34B5AC917B2"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shoe Store/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "paymentRequest"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - 2dee021f7dd5caf0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.PKPaymentRequest in variable initialization expression of Shoe_Store.ViewController.paymentRequest : __C.PKPaymentRequest"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - de31dd740372618e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.paymentRequest.getter : __C.PKPaymentRequest"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - b935e3f233671e9a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.paymentRequest.setter : __C.PKPaymentRequest"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - cbc58e2a24e6a54d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.paymentRequest.modify : __C.PKPaymentRequest"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - 3768ded4696cbbb0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.paymentRequest.modify : __C.PKPaymentRequest with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - 9ace91a8d007bed2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Shoe_Store.ViewController"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "CBE4156D-111F-4645-9A6B-30B907F375FD - 69c7938837ee465"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Shoe_Store.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Shoe_Store.ViewController&gt;"
+                  moduleName = "Shoe Store"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jide/Downloads/Shoe-Store-Starter/Shoe%20Store/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13ED8B66-6CBD-404B-84FB-800A153FF695"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhenThen ApplePay Demo/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
