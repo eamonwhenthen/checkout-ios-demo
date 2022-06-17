@@ -1,6 +1,10 @@
 //
 //  ViewController.swift
-//  WhenThen Demo
+//  WhenThen ApplePay Demo
+//
+//  Created by whenthen on 14.6.2022.
+//  Copyright © 2022 WhenThen. All rights reserved.
+//
 
 import Foundation
 import UIKit
@@ -8,8 +12,7 @@ import PassKit
 
 class ViewController: UIViewController {
     
-    var paymentSummaryItems = [PKPaymentSummaryItem]()
-    let flowId = "65d1673f-7003-4242-a009-bf6a0031bd3a"
+    let flowId = ""
 
     static let supportedNetworks: [PKPaymentNetwork] = [
         .amex,
@@ -23,7 +26,7 @@ class ViewController: UIViewController {
         // Create a payment request.
         let paymentRequest = PKPaymentRequest()
         
-        paymentRequest.merchantIdentifier = "merchant.co.whenthen.applepay"
+        paymentRequest.merchantIdentifier = ""
         paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.countryCode = "US"
         paymentRequest.currencyCode = "USD"
@@ -37,9 +40,7 @@ class ViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-        
-        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "Nike Air Force 1 High LV8", amount: 139.99)]
-        
+                
         return paymentRequest;
     }()
     
@@ -75,6 +76,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         shoePickerView.delegate = self
         shoePickerView.dataSource = self
+        
+        //set default cart item
+        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: shoeData[0].name, amount: NSDecimalNumber(value: shoeData[0].price))]
     }
     
 }
@@ -82,7 +86,7 @@ class ViewController: UIViewController {
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymentAuthorizationViewControllerDelegate  {
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        //controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
         
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
@@ -91,8 +95,8 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
         let errors = [Error]()
         
         var token = fromBase64(word: payment.token.paymentData.base64EncodedString())
-        token = "{ \"paymentData\": \(token) }"
-        
+        token = "{ \"paymentData\": \(token) }" //wrap token in paymentData object
+
         //let token = readLocalFile(forName: "ApplePayToken")!; //use local token
         
         //build the graphql request with token
@@ -108,7 +112,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
               mutation: AuthorizePaymentMutation( authorisePayment: authorizeInput)){ result in
               switch result {
                  case .success(let graphQLResult):
-                        if let paymentResult = graphQLResult.data?.authorizePayment {
+                        if let paymentResult = graphQLResult.data?.authorizePayment { //reflect payment success
                             if [.succeeded, .authorised].contains(paymentResult.status) {
                                 completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
                             }
@@ -146,6 +150,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate, PKPaymen
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let priceString = String(format: "%.02f", shoeData[row].price)
         priceLabel.text = "Price = $\(priceString)"
+        paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: shoeData[row].name, amount: NSDecimalNumber(value: shoeData[row].price))]
     }
     
     // MARK: - Helper functions

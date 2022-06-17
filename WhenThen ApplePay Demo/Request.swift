@@ -14,8 +14,8 @@ class Request {
     
     static let shared = Request()
 
-    private let apiKey = "sk_test_f39ZtDHRJ1Fj0gFTw2Ws8yHR5dxLDM5U"
-    private let apiEndpoint = "https://api.dev.whenthen.co/api/graphql"
+    private let apiKey = ""
+    private let apiEndpoint = "https://api.sandbox.whenthen.co/api/graphql"
 
     private(set) lazy var apollo: ApolloClient = {
         

@@ -2,8 +2,9 @@
 //  AppDelegate.swift
 //  WhenThen Demo
 //
+//  Created by whenthen on 14.6.2022.
+//  Copyright © 2022 WhenThen. All rights reserved.
 //
-
 import UIKit
 
 @UIApplicationMain
